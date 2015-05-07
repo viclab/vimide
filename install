@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if [ "$(uname -s)" = "Darwin" ]
+then
+    brew install ctags cscope
+elif [ "$(uname -s)" = "Linux" ]
+then
+    yum install ctags cscope
+else
+    sudo apt-get install ctags cscope
+fi
+
+chmod +x $(pwd)/upcs $(pwd)/upct
+mkdir -p /usr/local/bin/
+ln -s $(pwd)/upcs /usr/local/bin/upcs
+ln -s $(pwd)/upcs /usr/local/bin/upcs
+
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim -c PluginInstall
