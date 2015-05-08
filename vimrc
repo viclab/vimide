@@ -43,6 +43,23 @@ set foldmethod=manual                                 "indent 折叠方式
 "set foldmethod=marker                                "marker 折叠方式
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR> "常规模式下用空格键来开关光标行所在折叠（注：zR 展开所有折叠，zM关闭所有折叠）
 
+" 插入模式下用绝对行号, 普通模式下用相对
+autocmd InsertEnter * :set norelativenumber number
+autocmd InsertLeave * :set relativenumber
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber number
+  else
+    set relativenumber
+  endif
+endfunc
+nnoremap <C-n> :call NumberToggle()<cr>
+
+"撤销与重做
+set undolevels=1000         " 设置撤销限度
+nnoremap U <C-r>            " 映射 U 替代 <C-r> 
+
+"
 "搜索设置
 set hlsearch                        "设置高亮搜索
 set incsearch                       "设置实时搜索
