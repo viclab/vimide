@@ -13,6 +13,7 @@ Plugin 'molokai'                    "molokai主题
 Plugin 'The-NERD-tree'              "NERD目录树
 Plugin 'taglist.vim'                "函数变量列表
 Plugin 'majutsushi/tagbar'          "显示对象
+Plugin 'Raimondi/delimitMate'       "括号补全
 call vundle#end()
 
 "主题外观设置
@@ -34,9 +35,11 @@ set expandtab                       "将Tab键转换为空格
 set tabstop=4                       "设置Tab键的宽度，可以更改，如：宽度为2
 set shiftwidth=4                    "换行时自动缩进宽度，可更改（宽度同tabstop）
 set smarttab                        "指定按一次backspace就删除shiftwidth宽度
+set scrolloff=4     " 光标移动到buffer的顶部和底部时保持3行距离
 
 set foldenable                                        "启用折叠
-set foldmethod=indent                                 "indent 折叠方式
+set foldmethod=manual                                 "indent 折叠方式
+"set foldmethod=indent                                 "indent 折叠方式
 "set foldmethod=marker                                "marker 折叠方式
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR> "常规模式下用空格键来开关光标行所在折叠（注：zR 展开所有折叠，zM关闭所有折叠）
 
@@ -54,14 +57,35 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k 
 map <C-h> <C-W>h 
 map <C-l> <C-W>l 
+set pastetoggle=<F2>                "设置F2切换粘贴模式
 
 "特殊属性设置
+set clipboard+=unnamed              "共享剪贴板
+set showcmd
 set autoread
 if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif    "光标停留上次位置
     "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)                       "超过80标线
     au BufRead,BufNewFile,BufEnter * cd %:p:h             " 自动切换目录为当前编辑文件所在目录
 endif
+
+"设置自动补全
+":inoremap ( ()<ESC>i  
+":inoremap ) <c-r>=ClosePair(')')<CR>  
+:inoremap { {<CR>}<ESC>O
+":inoremap } <c-r>=ClosePair('}')<CR>  
+":inoremap [ []<ESC>i  
+":inoremap ] <c-r>=ClosePair(']')<CR>  
+":inoremap " ""<ESC>i  
+":inoremap ' ''<ESC>i  
+"function! ClosePair(char)  
+"    if getline('.')[col('.') - 1]== a:char  
+"        return "\<Right>"    
+"    else  
+"        return a:char  
+"    endif  
+"endfunction
+
 
 "OmniCppComplete补全设置
 "ctags -R –c++-kinds=+p –fields=+iaS –extra=+q
