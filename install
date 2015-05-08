@@ -13,10 +13,9 @@ else
     sudo apt-get install ctags cscope
 fi
 
-chmod +x $(pwd)/upcs $(pwd)/upct
+chmod +x $(pwd)/upcs 
 mkdir -p /usr/local/bin/
 ln -s $(pwd)/upcs /usr/local/bin/upcs
-ln -s $(pwd)/upct /usr/local/bin/upct
 ln -s $(pwd)/vimrc ~/.vimrc
 
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
