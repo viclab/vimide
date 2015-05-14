@@ -14,6 +14,7 @@ Plugin 'The-NERD-tree'              "NERD目录树
 Plugin 'taglist.vim'                "函数变量列表
 Plugin 'majutsushi/tagbar'          "显示对象
 Plugin 'Raimondi/delimitMate'       "括号补全
+Plugin 'fholgado/minibufexpl.vim'   "管理打开文件"
 call vundle#end()
 
 "主题外观设置
@@ -119,6 +120,11 @@ let OmniCpp_DefaultNamespace=["std"]
 let OmniCpp_ShowPrototypeInAbbr=1       "打开显示函数原型
 let OmniCpp_SelectFirstItem = 2         "自动弹出时自动跳至第一个
 
+" Popup menu hightLight Group
+highlight Pmenu ctermbg=Blue guibg=LightGray
+highlight PmenuSel ctermbg=DarkRed guibg=DarkBlue guifg=White
+highlight PmenuSbar ctermbg=DarkGrey guibg=DarkGray
+highlight PmenuThumb guibg=Black
 
 "Tagbar插件配置
 let g:tagbar_width=30                       "设置窗口宽度
@@ -163,3 +169,26 @@ if has("cscope")
     nmap ,d :cs find d <C-R>=expand("<cword>")<CR><CR>
     nmap . <C-T>
 endif
+
+" --------------------
+" MiniBufExpl
+" --------------------
+let g:miniBufExplTabWrap = 1 " make tabs show complete (no broken on two lines)
+let g:miniBufExplModSelTarget = 1 " If you use other explorers like TagList you can (As of 6.2.8) set it at 1:
+let g:miniBufExplUseSingleClick = 1 " If you would like to single click on tabs rather than double clicking on them to goto the selected buffer.
+let g:miniBufExplMaxSize = 1 " <max lines: defualt 0> setting this to 0 will mean the window gets as big as needed to fit all your buffers.
+"let g:miniBufExplForceSyntaxEnable = 1 " There is a Vim bug that can cause buffers to show up without their highlighting. The following setting will cause MBE to
+"let g:miniBufExplorerMoreThanOne = 1 " Setting this to 0 will cause the MBE window to be loaded even
+let g:miniBufExplMapCTabSwitchBufs = 1
+"let g:miniBufExplMapWindowNavArrows = 1
+"for buffers that have NOT CHANGED and are NOT VISIBLE.
+"highlight MBENormal  ctermfg=DarkGray  guibg=LightGray guifg=DarkGray
+" buffers that have NOT CHANGED and are VISIBLE
+highlight MBEVisibleNormal term=bold cterm=bold gui=bold guibg=Gray guifg=Black ctermbg=Blue  ctermfg=Green
+" for buffers that HAVE CHANGED and are NOT VISIBLE
+highlight MBEChanged ctermfg=DarkRed guibg=Red guifg=DarkRed
+" buffers that HAVE CHANGED and are VISIBLE
+highlight MBEVisibleChanged term=bold cterm=bold gui=bold guibg=DarkRed guifg=Black ctermbg=Blue ctermfg=Red
+
+nnoremap ( :MBEbp<CR>
+nnoremap ) :MBEbn<CR>
