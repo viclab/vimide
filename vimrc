@@ -159,4 +159,5 @@ if has("cscope")
     nmap ,f :cs find f <C-R>=expand("<cfile>")<CR><CR>
     nmap ,i :cs find i <C-R>=expand("<cfile>")<CR><CR>
     nmap ,d :cs find d <C-R>=expand("<cword>")<CR><CR>
+    nmap . <C-T>
 endif
