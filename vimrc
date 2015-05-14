@@ -75,6 +75,8 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h 
 map <C-l> <C-W>l 
 set pastetoggle=<F2>                "设置F2切换粘贴模式
+nmap H ^
+nmap L $
 
 "特殊属性设置
 set clipboard+=unnamed              "共享剪贴板
